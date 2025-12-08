@@ -337,7 +337,7 @@ build-npm: build-wasm
 clean-build:
 	@echo 🗑️ Cleaning Output Directory
 ifeq ($(OPERATING_SYSTEM),Windows)
-	pwsh -Command "rm -R -Fo $(ELECTIONGUARD_BUILD_DIR_WIN); $$null"
+	pwsh -Command "Remove-Item -Recurse -Force '$(ELECTIONGUARD_BUILD_DIR_WIN)' -ErrorAction SilentlyContinue; exit 0"
 else
 	if [ -d "$(ELECTIONGUARD_BUILD_DIR)" ]; then rm -rf $(ELECTIONGUARD_BUILD_DIR)/*; fi
 	if [ ! -d "$(ELECTIONGUARD_BUILD_DIR)" ]; then mkdir $(ELECTIONGUARD_BUILD_DIR); fi
@@ -362,7 +362,7 @@ clean-netstandard:
 
 clean-ui:
 	@echo 🗑️ CLEAN UI
-	cd ./$(ELECTIONGUARD_APP_ADMIN_DIR) && dotnet restore
+	cd ./$(ELECTIONGUARD_APP_ADMIN_DIR) && dotnet restore -r win-x64
 	dotnet clean -c Debug ./$(ELECTIONGUARD_APP_ADMIN_DIR)/ElectionGuard.UI.sln
 	dotnet clean -c Release ./$(ELECTIONGUARD_APP_ADMIN_DIR)/ElectionGuard.UI.sln
 
@@ -728,7 +728,11 @@ fetch-sample-data:
 	@echo ⬇️ FETCH Sample Data
 	wget -O $(TEMPFILE) https://github.com/microsoft/electionguard/releases/download/v1.0/sample-data.zip
 	unzip -o $(TEMPFILE)
+ifeq ($(OPERATING_SYSTEM),Windows)
+	pwsh -Command "Remove-Item -Force '$(TEMPFILE)' -ErrorAction SilentlyContinue"
+else
 	rm -f $(TEMPFILE)
+endif
 
 generate-sample-data: build-netstandard
 	@echo Generate Sample Data
@@ -742,4 +746,3 @@ generate-sample-election-record: build-netstandard
 verify: build-cli
 	@echo 🧪 Executing CLI Verifier $(OPERATING_SYSTEM) $(PROCESSOR) $(TARGET)
 	cd ./apps/electionguard-cli && dotnet run -a $(PROCESSOR) -c $(TARGET) verify -- -f $(ELECTIONGUARD_DATA_DIR)/test/ElectionRecord.zip
-	

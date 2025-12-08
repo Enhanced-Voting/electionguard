@@ -26,7 +26,7 @@
         "build": "tsc && copyfiles -u 1 src/**/*.wasm dist",
         "build:wasm": "cd ../.. && make build-wasm",
         "clean": "rm -rf dist",
-        "clean:all": "rm -rf dist && rm -r src/wasm/electionguard.wasm.*",
+        "clean:all": "rm -rf dist && rm -rf src/wasm/electionguard.wasm.*",
         "pack": "webpack",
         "prepare": "npm run clean && npm run build",
         "restore": "rm -r node_modules && npm install",

@@ -7,9 +7,14 @@ COPY . /usr/src/app
 RUN apt-get -y update && apt-get install -y
 RUN apt-get install wget curl unzip git make sudo mono-complete -y
 
-# .NET 6.0 install
+# Install Node.js and npm
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g npm@latest
+
+# .NET 9.0 install
 WORKDIR /tmp
-RUN wget https://dot.net/v1/dotnet-install.sh && chmod +x dotnet-install.sh && ./dotnet-install.sh -c 6.0
+RUN wget https://dot.net/v1/dotnet-install.sh && chmod +x dotnet-install.sh && ./dotnet-install.sh -c 9.0
 ENV PATH="$PATH:/root/.dotnet"
 
 #Container runtime
