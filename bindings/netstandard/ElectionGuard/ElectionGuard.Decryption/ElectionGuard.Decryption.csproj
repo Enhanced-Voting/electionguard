@@ -13,7 +13,114 @@
     <Platforms>x64;x86</Platforms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
+  <PropertyGroup Label="Library Paths">
+    <ElectionGuardLibs>..\..\..\..\build\libs</ElectionGuardLibs>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package Native Libraries">
+    <Content Name="Windows arm64" Include="$(ElectionGuardLibs)\Windows\arm64\$(Configuration)\src\$(Configuration)\*.dll*">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\win-arm64\native</PackagePath>
+    </Content>
+    <Content Name="Windows arm64 HACL" Include="$(ElectionGuardLibs)\Windows\arm64\$(Configuration)\libs\hacl\$(Configuration)\*.dll*">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\win-arm64\native</PackagePath>
+    </Content>
+    <Content Name="Windows x86" Include="$(ElectionGuardLibs)\Windows\x86\$(Configuration)\src\$(Configuration)\*.dll*">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\win-x86\native</PackagePath>
+    </Content>
+    <Content Name="Windows x86 HACL" Include="$(ElectionGuardLibs)\Windows\x86\$(Configuration)\libs\hacl\$(Configuration)\*.dll*">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\win-x86\native</PackagePath>
+    </Content>
+    <Content Name="Windows x86 (MSYS2)" Include="$(ElectionGuardLibs)\Windows\x86\$(Configuration)\src\*.dll*">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\win-x86\native</PackagePath>
+    </Content>
+    <Content Name="Windows x86 HACL (MSYS2)" Include="$(ElectionGuardLibs)\Windows\x86\$(Configuration)\libs\hacl\*.dll*">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\win-x86\native</PackagePath>
+    </Content>
+    <Content Name="Windows x64" Include="$(ElectionGuardLibs)\Windows\x64\$(Configuration)\src\$(Configuration)\*.dll*">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\win-x64\native</PackagePath>
+    </Content>
+    <Content Name="Windows x64 HACL" Include="$(ElectionGuardLibs)\Windows\x64\$(Configuration)\libs\hacl\$(Configuration)\*.dll*">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\win-x64\native</PackagePath>
+    </Content>
+    <Content Name="MacOS arm64" Include="$(ElectionGuardLibs)\Darwin\arm64\$(Configuration)\src\*.dylib">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\osx-arm64\native</PackagePath>
+    </Content>
+    <Content Name="MacOS arm64 HACL" Include="$(ElectionGuardLibs)\Darwin\arm64\$(Configuration)\libs\hacl\*.dylib">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\osx-arm64\native</PackagePath>
+    </Content>
+    <Content Name="MacOS x64" Include="$(ElectionGuardLibs)\Darwin\x64\$(Configuration)\src\*.dylib">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\osx-x64\native</PackagePath>
+    </Content>
+    <Content Name="MacOS x64 HACL" Include="$(ElectionGuardLibs)\Darwin\x64\$(Configuration)\libs\hacl\*.dylib">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\osx-x64\native</PackagePath>
+    </Content>
+    <Content Name="MacCatalyst arm64" Include="$(ElectionGuardLibs)\MacCatalyst\arm64\$(Configuration)\src\*.dylib">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\maccatalyst-arm64\native</PackagePath>
+    </Content>
+    <Content Name="MacCatalyst arm64 HACL" Include="$(ElectionGuardLibs)\MacCatalyst\arm64\$(Configuration)\libs\hacl\*.dylib">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\maccatalyst-arm64\native</PackagePath>
+    </Content>
+    <Content Name="MacCatalyst x64" Include="$(ElectionGuardLibs)\MacCatalyst\x64\$(Configuration)\src\*.dylib">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\maccatalyst-x64\native</PackagePath>
+    </Content>
+    <Content Name="MacCatalyst x64 HACL" Include="$(ElectionGuardLibs)\MacCatalyst\x64\$(Configuration)\libs\hacl\*.dylib">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\maccatalyst-x64\native</PackagePath>
+    </Content>
+    <Content Name="Linux arm64" Include="$(ElectionGuardLibs)\Linux\arm64\$(Configuration)\src\*.so">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\linux-arm64\native</PackagePath>
+    </Content>
+    <Content Name="Linux arm64 HACL" Include="$(ElectionGuardLibs)\Linux\arm64\$(Configuration)\libs\hacl\*.so">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\linux-arm64\native</PackagePath>
+    </Content>
+    <Content Name="Linux x64" Include="$(ElectionGuardLibs)\Linux\x64\$(Configuration)\src\*.so">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\linux-x64\native</PackagePath>
+    </Content>
+    <Content Name="Linux x64 HACL" Include="$(ElectionGuardLibs)\Linux\x64\$(Configuration)\libs\hacl\*.so">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <PackagePath>runtimes\linux-x64\native</PackagePath>
+    </Content>
+  </ItemGroup>
 
   <PropertyGroup>
     <!-- Package -->
