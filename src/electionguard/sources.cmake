@@ -16,6 +16,7 @@ set(FACADES_electionguard
     ${PROJECT_SOURCE_DIR}/src/electionguard/facades/exception_handler.cpp
     ${PROJECT_SOURCE_DIR}/src/electionguard/facades/group.cpp
     ${PROJECT_SOURCE_DIR}/src/electionguard/facades/hash.cpp
+    ${PROJECT_SOURCE_DIR}/src/electionguard/facades/log.cpp
     ${PROJECT_SOURCE_DIR}/src/electionguard/facades/manifest.cpp
     ${PROJECT_SOURCE_DIR}/src/electionguard/facades/nonces.cpp
     ${PROJECT_SOURCE_DIR}/src/electionguard/facades/polynomial.cpp
@@ -67,6 +68,7 @@ set(INCLUDES_electionguard_h
     ${PROJECT_SOURCE_DIR}/include/electionguard/exception_handler.h
     ${PROJECT_SOURCE_DIR}/include/electionguard/group.h
     ${PROJECT_SOURCE_DIR}/include/electionguard/hash.h
+    ${PROJECT_SOURCE_DIR}/include/electionguard/log.h
     ${PROJECT_SOURCE_DIR}/include/electionguard/manifest.h
     ${PROJECT_SOURCE_DIR}/include/electionguard/nonces.h
     ${PROJECT_SOURCE_DIR}/include/electionguard/polynomial.h
