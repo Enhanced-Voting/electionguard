@@ -1,10 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <Version>1.75.17</Version>
-    <AssemblyVersion>1.75.17.0</AssemblyVersion>
-    <AssemblyFileVersion>1.75.17.0</AssemblyFileVersion>
+    <Version>1.92.8</Version>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -125,7 +123,6 @@
     <Title>Enhanced ElectionGuard Election Setup</Title>
     <Description>Private fork of open source implementation of ElectionGuard's election setup.</Description>
     <Authors>Enhanced Voting</Authors>
-    <PackageVersion>1.75.17</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Enhanced-Voting/electionguard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Enhanced-Voting/electionguard</RepositoryUrl>

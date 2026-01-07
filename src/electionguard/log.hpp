@@ -50,7 +50,9 @@ namespace electionguard
         static void error(string msg, DomainLoggableType obj,
                           const char *caller = __builtin_FUNCTION());
         static void error(string msg, const std::exception &obj,
-                          const char *caller = __builtin_FUNCTION());
+                          const char *caller = __builtin_FUNCTION(),
+                          const char *file = __builtin_FILE(),
+                          int line = __builtin_LINE());
 
       private:
         class Impl;

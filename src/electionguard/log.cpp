@@ -7,6 +7,7 @@
 
 #include <iomanip>
 #include <sstream>
+#include <typeinfo>
 
 using std::boolalpha;
 using std::endl;
@@ -96,7 +97,11 @@ namespace electionguard
             if (_instance.logger != nullptr)
                 return _instance;
 
-            auto console = spdlog::stdout_logger_mt("console");
+            // Check if logger already exists in spdlog registry
+            auto console = spdlog::get("console");
+            if (!console) {
+                console = spdlog::stdout_logger_mt("console");
+            }
 #if LOG_DEBUG
             console->set_level(spdlog::level::debug);
 #elif LOG_TRACE
@@ -106,6 +111,10 @@ namespace electionguard
 #endif
             spdlog::set_default_logger(console);
             spdlog::set_pattern("[%H:%M:%S:%e %z] [p: %P] [t: %t] [%l] :: %v");
+
+            // Automatically flush on error and critical messages
+            console->flush_on(spdlog::level::err);
+
             _instance.logger = console;
             return _instance;
         }
@@ -141,9 +150,13 @@ namespace electionguard
         Impl::instance().logger->error("{}::{}: {}", caller, msg, format(obj));
         ExceptionHandler::getInstance().setData(msg, 0, format(obj));
     }
-    void Log::error(string msg, const std::exception &obj, const char *caller)
+    void Log::error(string msg, const std::exception &obj, const char *caller, const char *file,
+                    int line)
     {
-        Impl::instance().logger->error("{}::{}: {}", caller, msg, obj.what());
+        // Include exception type information and file location
+        string exceptionType = typeid(obj).name();
+        Impl::instance().logger->error("{}::{} ({}:{}): [{}] {}", caller, msg, file, line,
+                                       exceptionType, obj.what());
         ExceptionHandler::getInstance().setData(msg, 0, obj);
     }
 

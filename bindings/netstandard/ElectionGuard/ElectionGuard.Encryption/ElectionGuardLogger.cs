@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace ElectionGuard
+namespace ElectionGuard.Encryption
 {
     /// <summary>
     /// Log level enumeration for ElectionGuard native logging

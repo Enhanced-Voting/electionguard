@@ -5,9 +5,7 @@
     <!-- Project -->
     <RootNamespace>ElectionGuard</RootNamespace>
     <AssemblyName>ElectionGuard.Encryption</AssemblyName>
-    <Version>1.75.17</Version>
-    <AssemblyVersion>1.75.17.0</AssemblyVersion>
-    <AssemblyFileVersion>1.75.17.0</AssemblyFileVersion>
+    <Version>1.92.8</Version>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <Platforms>x64;x86</Platforms>
@@ -18,7 +16,6 @@
     <Title>Enhanced ElectionGuard Encryption</Title>
     <Description>Private fork of open source implementation of ElectionGuard's ballot encryption.</Description>
     <Authors>Enhanced Voting</Authors>
-    <PackageVersion>1.75.17</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Enhanced-Voting/electionguard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Enhanced-Voting/electionguard</RepositoryUrl>

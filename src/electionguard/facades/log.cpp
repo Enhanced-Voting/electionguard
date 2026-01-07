@@ -192,26 +192,41 @@ EG_API eg_electionguard_status_t eg_log_set_level(eg_log_level_t level)
 EG_API eg_electionguard_status_t eg_log_set_file(const char *filepath)
 {
     try {
-        if (filepath == nullptr) {
+        if (filepath == nullptr || strlen(filepath) == 0) {
             return ELECTIONGUARD_STATUS_ERROR_INVALID_ARGUMENT;
         }
 
-        auto logger = spdlog::default_logger();
+        // Force Log::Impl initialization if needed
+        Log::info("Initializing file logging");
+
+        // Get the "console" logger by name (this is what Log::Impl uses)
+        auto logger = spdlog::get("console");
         if (logger == nullptr) {
-            return ELECTIONGUARD_STATUS_ERROR_BAD_ACCESS;
+            // Fallback to default logger
+            logger = spdlog::default_logger();
+            if (logger == nullptr) {
+                return ELECTIONGUARD_STATUS_ERROR_BAD_ACCESS;
+            }
         }
 
-        // Create a file sink with the same pattern as other sinks
-        auto file_sink = make_shared<spdlog::sinks::basic_file_sink_mt>(filepath, true);
-        file_sink->set_pattern("[%H:%M:%S:%e %z] [p: %P] [t: %t] [%l] :: %v");
+        // Create file sink
+        auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(filepath, true);
+        file_sink->set_level(spdlog::level::trace); // Log everything to file
+        file_sink->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%l] %v");
 
-        // Add the file sink to the logger
+        // Add to existing logger's sinks
         logger->sinks().push_back(file_sink);
+
+        // Force flush and test immediately
+        logger->info("=== ElectionGuard native logging initialized ===");
+        logger->info("Log file: {}", filepath);
+        logger->info("Logger has {} sinks", logger->sinks().size());
+        logger->flush();
 
         return ELECTIONGUARD_STATUS_SUCCESS;
     } catch (const std::exception &e) {
-        Log::error("eg_log_set_file", e);
-        return ELECTIONGUARD_STATUS_ERROR_IO_ERROR;
+        fprintf(stderr, "eg_log_set_file error: %s\n", e.what());
+        return ELECTIONGUARD_STATUS_ERROR_INVALID_ARGUMENT;
     }
 }
 
