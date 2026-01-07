@@ -123,6 +123,7 @@
     <Title>Enhanced ElectionGuard Election Setup</Title>
     <Description>Private fork of open source implementation of ElectionGuard's election setup.</Description>
     <Authors>Enhanced Voting</Authors>
+		<PackageVersion>0.0.0</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Enhanced-Voting/electionguard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Enhanced-Voting/electionguard</RepositoryUrl>

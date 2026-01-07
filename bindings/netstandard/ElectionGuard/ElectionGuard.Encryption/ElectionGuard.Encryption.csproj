@@ -16,6 +16,7 @@
     <Title>Enhanced ElectionGuard Encryption</Title>
     <Description>Private fork of open source implementation of ElectionGuard's ballot encryption.</Description>
     <Authors>Enhanced Voting</Authors>
+    <PackageVersion>0.0.0</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Enhanced-Voting/electionguard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Enhanced-Voting/electionguard</RepositoryUrl>
