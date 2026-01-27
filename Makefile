@@ -413,11 +413,11 @@ endif
 publish-ui: 
 	@echo 🧱 PUBLISH UI
 ifeq ($(OPERATING_SYSTEM),Windows)
-	dotnet publish -f net7.0-windows10.0.19041.0 -c $(TARGET) /p:WindowsPackageType=None /p:ApplicationVersion=$(BUILD_NUMBER) /p:RuntimeIdentifierOverride=win10-x64 /p:APPCENTER_SECRET_UWP=$(APPCENTER_SECRET_UWP) ./$(ELECTIONGUARD_APP_ADMIN_DIR)/ElectionGuard.UI/ElectionGuard.UI.csproj -o ./publish/ElectionGuard.UI
+	dotnet publish -f net10.0-windows10.0.19041.0 -c $(TARGET) /p:WindowsPackageType=None /p:ApplicationVersion=$(BUILD_NUMBER) /p:RuntimeIdentifierOverride=win10-x64 /p:APPCENTER_SECRET_UWP=$(APPCENTER_SECRET_UWP) ./$(ELECTIONGUARD_APP_ADMIN_DIR)/ElectionGuard.UI/ElectionGuard.UI.csproj -o ./publish/ElectionGuard.UI
 	cd ./publish && pwsh -Command "Compress-Archive ElectionGuard.UI ElectionGuard.UI.zip -Force"
 endif
 ifeq ($(OPERATING_SYSTEM),Darwin)
-	dotnet publish -f net7.0-maccatalyst -c $(TARGET) /p:CreatePackage=true /p:ApplicationVersion=$(BUILD_NUMBER) /p:APPCENTER_SECRET_MACOS=$(APPCENTER_SECRET_MACOS) ./$(ELECTIONGUARD_APP_ADMIN_DIR)/ElectionGuard.UI/ElectionGuard.UI.csproj -o ./publish
+	dotnet publish -f net10.0-maccatalyst -c $(TARGET) /p:CreatePackage=true /p:ApplicationVersion=$(BUILD_NUMBER) /p:APPCENTER_SECRET_MACOS=$(APPCENTER_SECRET_MACOS) ./$(ELECTIONGUARD_APP_ADMIN_DIR)/ElectionGuard.UI/ElectionGuard.UI.csproj -o ./publish
 endif
 
 publish-ui-appcenter: 
@@ -523,14 +523,14 @@ endif
 bench-netstandard: build-netstandard
 # handle executing benchamrks on different processors
 ifeq ($(HOST_PROCESSOR),$(PROCESSOR))
-	@echo 🧪 BENCHMARK $(OPERATING_SYSTEM) $(PROCESSOR) $(TARGET) net7.0
-	dotnet run --framework net7.0 -a $(PROCESSOR) -c $(TARGET) --project $(ELECTIONGUARD_BINDING_BENCH_DIR)/Electionguard.Encryption.Bench.csproj 	
+	@echo 🧪 BENCHMARK $(OPERATING_SYSTEM) $(PROCESSOR) $(TARGET) net10.0
+	dotnet run --framework net10.0 -a $(PROCESSOR) -c $(TARGET) --project $(ELECTIONGUARD_BINDING_BENCH_DIR)/Electionguard.Encryption.Bench.csproj 	
 
 	# @echo 🧪 BENCHMARK $(OPERATING_SYSTEM) $(PROCESSOR) $(TARGET) netstandard2.0
 	# dotnet run --framework netstandard2.0 -a $(PROCESSOR) -c $(TARGET) --project $(ELECTIONGUARD_BINDING_BENCH_DIR)/Electionguard.Encryption.Bench.csproj 	
 else
-	@echo 🧪 BENCHMARK $(OPERATING_SYSTEM) $(PROCESSOR) on $(HOST_PROCESSOR) $(TARGET) net7.0
-	$(DOTNET_PATH)/$(PROCESSOR)/dotnet exec --runtimeconfig $(ELECTIONGUARD_BINDING_BENCH_DIR)/bin/$(PROCESSOR)/$(TARGET)/net7.0/ElectionGuard.Encryption.Bench.runtimeconfig.json $(ELECTIONGUARD_BINDING_BENCH_DIR)/bin/$(PROCESSOR)/$(TARGET)/net7.0/ElectionGuard.Encryption.Bench.dll
+	@echo 🧪 BENCHMARK $(OPERATING_SYSTEM) $(PROCESSOR) on $(HOST_PROCESSOR) $(TARGET) net10.0
+	$(DOTNET_PATH)/$(PROCESSOR)/dotnet exec --runtimeconfig $(ELECTIONGUARD_BINDING_BENCH_DIR)/bin/$(PROCESSOR)/$(TARGET)/net10.0/ElectionGuard.Encryption.Bench.runtimeconfig.json $(ELECTIONGUARD_BINDING_BENCH_DIR)/bin/$(PROCESSOR)/$(TARGET)/net10.0/ElectionGuard.Encryption.Bench.dll
 	
 	# @echo 🧪 BENCHMARK $(OPERATING_SYSTEM) $(PROCESSOR) on $(HOST_PROCESSOR) $(TARGET) netstandard2.0
 	# $(DOTNET_PATH)/$(PROCESSOR)/dotnet $(ELECTIONGUARD_BINDING_BENCH_DIR)/bin/$(PROCESSOR)/$(TARGET)/netstandard2.0/ElectionGuard.Encryption.Bench.dll
@@ -660,29 +660,29 @@ endif
 test-netstandard-copy-output:
 	@echo 🧪 TEST NETSTANDARD COPY OUTPUT $(PROCESSOR) $(TARGET)
 ifeq ($(OPERATING_SYSTEM),Windows)
-	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR) /p 
-	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR) /p 
-	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR) /p 
+	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR) /p 
+	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR) /p 
+	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR) /p 
 
-	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net7.0/runtimes/win/native /p 
-	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net7.0/runtimes/win/native /p 
-	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net7.0/runtimes/win/native /p 
+	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net10.0/runtimes/win/native /p 
+	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net10.0/runtimes/win/native /p 
+	mkdir ./bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net10.0/runtimes/win/native /p 
 
-	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/src/$(TARGET)/electionguard.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR)/electionguard.dll" /s 
-	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/src/$(TARGET)/electionguard.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR)/electionguard.dll" /s 
-	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/src/$(TARGET)/electionguard.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR)/electionguard.dll" /s 
+	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/src/$(TARGET)/electionguard.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR)/electionguard.dll" /s 
+	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/src/$(TARGET)/electionguard.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR)/electionguard.dll" /s 
+	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/src/$(TARGET)/electionguard.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR)/electionguard.dll" /s 
 
-	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/libs/hacl/$(TARGET)/hacl_cpp.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR)/hacl_cpp.dll" /s 
-	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/libs/hacl/$(TARGET)/hacl_cpp.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR)/hacl_cpp.dll" /s 
-	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/libs/hacl/$(TARGET)/hacl_cpp.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR)/hacl_cpp.dll" /s 
+	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/libs/hacl/$(TARGET)/hacl_cpp.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR)/hacl_cpp.dll" /s 
+	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/libs/hacl/$(TARGET)/hacl_cpp.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR)/hacl_cpp.dll" /s 
+	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/libs/hacl/$(TARGET)/hacl_cpp.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR)/hacl_cpp.dll" /s 
 
-	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/_deps/hacl-build/$(TARGET)/hacl.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR)/hacl.dll" /s 
-	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/_deps/hacl-build/$(TARGET)/hacl.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR)/hacl.dll" /s 
-	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/_deps/hacl-build/$(TARGET)/hacl.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net7.0/win-$(PROCESSOR)/hacl.dll" /s 
+	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/_deps/hacl-build/$(TARGET)/hacl.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR)/hacl.dll" /s 
+	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/_deps/hacl-build/$(TARGET)/hacl.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR)/hacl.dll" /s 
+	xcopy "build/libs/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/_deps/hacl-build/$(TARGET)/hacl.dll" "bindings/netstandard/ElectionGuard/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net10.0/win-$(PROCESSOR)/hacl.dll" /s 
 endif
 ifeq ($(OPERATING_SYSTEM),Darwin)
 	input_files="$(ELECTIONGUARD_BUILD_LIBS_DIR)/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/src/*.{dylib,a} $(ELECTIONGUARD_BUILD_LIBS_DIR)/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/libs/hacl/*.{dylib,a} $(ELECTIONGUARD_BUILD_LIBS_DIR)/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET)/_deps/hacl-build/*.{dylib,a}"
-	output_dirs="$(ELECTIONGUARD_BINDING_NETSTANDARD_DIR)/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net7.0/runtimes/osx/native $(ELECTIONGUARD_BINDING_NETSTANDARD_DIR)/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net7.0/runtimes/osx/native $(ELECTIONGUARD_BINDING_NETSTANDARD_DIR)/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net7.0/runtimes/osx/native"
+	output_dirs="$(ELECTIONGUARD_BINDING_NETSTANDARD_DIR)/ElectionGuard.Decryption.Tests/bin/$(TARGET)/net10.0/runtimes/osx/native $(ELECTIONGUARD_BINDING_NETSTANDARD_DIR)/ElectionGuard.ElectionSetup.Tests/bin/$(TARGET)/net10.0/runtimes/osx/native $(ELECTIONGUARD_BINDING_NETSTANDARD_DIR)/ElectionGuard.Encryption.Tests/bin/$(TARGET)/net10.0/runtimes/osx/native"
 	echo "$$input_files" | xargs cp -n -R --preserve=mode,timestamps $$output_dirs
 endif
 
