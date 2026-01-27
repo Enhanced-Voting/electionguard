@@ -10,26 +10,26 @@
     <AssemblyFileVersion>1.75.17.0</AssemblyFileVersion>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <Platforms>x64;x86</Platforms>
+    <Platforms>arm64;x64;x86</Platforms>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Package -->
-    <PackageId>Enhanced.ElectionGuard.Encryption</PackageId>
-    <Title>Enhanced ElectionGuard Encryption</Title>
-    <Description>Private fork of open source implementation of ElectionGuard's ballot encryption.</Description>
-    <Authors>Enhanced Voting</Authors>
+    <PackageId>ElectionGuard.Encryption</PackageId>
+    <Title>ElectionGuard Encryption</Title>
+    <Description>Open source implementation of ElectionGuard's ballot encryption.</Description>
+    <Authors>Microsoft</Authors>
     <PackageVersion>1.75.17</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Enhanced-Voting/electionguard</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Enhanced-Voting/electionguard</RepositoryUrl>
-    <PackageTags>Enhanced;Electionguard;Encryption;Windows;Linux</PackageTags>
+    <PackageProjectUrl>https://github.com/Election-Tech-Initiative/electionguard-core2</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Election-Tech-Initiative/electionguard-core2</RepositoryUrl>
+    <PackageTags>Electionguard;Encryption;Windows;Linux</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <!-- <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> -->
     <!-- <PackageReleaseNotes>Changelog</PackageReleaseNotes> -->
-    <Platforms>x64;x86</Platforms>
+    <Platforms>arm64;x64;x86</Platforms>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>ElectionGuard</Import_RootNamespace>

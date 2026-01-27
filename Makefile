@@ -185,7 +185,7 @@ build:
 	@echo 🧱 BUILD $(OPERATING_SYSTEM) $(PROCESSOR) $(TARGET) $(VSPLATFORM)
 ifeq ($(OPERATING_SYSTEM),Windows)
 	cmake -S . -B $(ELECTIONGUARD_BUILD_LIBS_DIR)/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET) \
-		-G "Visual Studio 17 2022" -A $(VSPLATFORM) \
+		-G "Visual Studio 18" -A $(VSPLATFORM) \
 		-DCMAKE_BUILD_TYPE=$(TARGET) \
 		-DBUILD_SHARED_LIBS=ON \
 		-DDISABLE_VALE=$(TEMP_DISABLE_VALE) \
@@ -462,7 +462,7 @@ sanitize: sanitize-asan sanitize-tsan
 sanitize-asan:
 	@echo 🧼 SANITIZE ADDRESS AND UNDEFINED $(PROCESSOR)
 ifeq ($(OPERATING_SYSTEM),Windows)
-	cmake -S . -B $(ELECTIONGUARD_BUILD_LIBS_DIR)/$(PROCESSOR)/Debug -G "Visual Studio 17 2022" -A $(PROCESSOR) \
+	cmake -S . -B $(ELECTIONGUARD_BUILD_LIBS_DIR)/$(PROCESSOR)/Debug -G "Visual Studio 18" -A $(PROCESSOR) \
 		-DCPM_SOURCE_CACHE=$(CPM_SOURCE_CACHE) \
 		-DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/sanitize.asan.cmake
 	cmake --build $(ELECTIONGUARD_BUILD_LIBS_DIR)/$(PROCESSOR)/Debug --config Debug
@@ -556,7 +556,7 @@ test:
 	@echo 🧪 TEST $(OPERATING_SYSTEM) $(PROCESSOR) $(TARGET) $(VSPLATFORM)
 ifeq ($(OPERATING_SYSTEM),Windows)
 	cmake -S . -B $(ELECTIONGUARD_BUILD_LIBS_DIR)/$(OPERATING_SYSTEM)/$(PROCESSOR)/$(TARGET) \
-		-G "Visual Studio 17 2022" -A $(VSPLATFORM) \
+		-G "Visual Studio 18" -A $(VSPLATFORM) \
 		-DCMAKE_BUILD_TYPE=$(TARGET) \
 		-DBUILD_SHARED_LIBS=ON \
 		-DEXPORT_INTERNALS=ON \

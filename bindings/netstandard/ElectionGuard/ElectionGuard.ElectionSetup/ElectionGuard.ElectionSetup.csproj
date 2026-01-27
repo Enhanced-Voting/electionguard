@@ -9,28 +9,28 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <Platforms>x64;x86</Platforms>
+    <Platforms>arm64;x64;x86</Platforms>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
   <PropertyGroup>
     <!-- Package -->
-    <PackageId>Enhanced.ElectionGuard.ElectionSetup</PackageId>
-    <Title>Enhanced ElectionGuard Election Setup</Title>
-    <Description>Private fork of open source implementation of ElectionGuard's election setup.</Description>
-    <Authors>Enhanced Voting</Authors>
+    <PackageId>ElectionGuard.ElectionSetup</PackageId>
+    <Title>ElectionGuard Election Setup</Title>
+    <Description>Open source implementation of ElectionGuard's election setup.</Description>
+    <Authors>Microsoft</Authors>
     <PackageVersion>1.75.17</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Enhanced-Voting/electionguard</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Enhanced-Voting/electionguard</RepositoryUrl>
-    <PackageTags>Enhanced;Electionguard;Election;Setup;Windows;Linux</PackageTags>
+    <PackageProjectUrl>https://github.com/Election-Tech-Initiative/electionguard-core2</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Election-Tech-Initiative/electionguard-core2</RepositoryUrl>
+    <PackageTags>Electionguard;Election;Setup;Windows;Linux</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <!-- <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> -->
     <!-- <PackageReleaseNotes>Changelog</PackageReleaseNotes> -->
-    <Platforms>x64;x86</Platforms>
+    <Platforms>arm64;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
