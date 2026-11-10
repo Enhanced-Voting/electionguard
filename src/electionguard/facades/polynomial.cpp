@@ -22,7 +22,8 @@ eg_electionguard_status_t eg_polynomial_interpolate(eg_element_mod_q_t *in_coord
                                                     uint64_t in_degrees_size,
                                                     eg_element_mod_q_t **out_result)
 {
-    if (in_coordinate == nullptr || in_degrees == nullptr || in_degrees_size == 0 ||
+    // An empty degree list is valid: with a single guardian the Lagrange coefficient is 1.
+    if (in_coordinate == nullptr || (in_degrees == nullptr && in_degrees_size > 0) ||
         out_result == nullptr) {
         return ELECTIONGUARD_STATUS_ERROR_INVALID_ARGUMENT;
     }

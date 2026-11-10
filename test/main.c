@@ -16,6 +16,7 @@ bool test_encrypt(void);
 bool test_group(void);
 bool test_hash(void);
 bool test_manifest(void);
+bool test_polynomial(void);
 
 int main(void)
 {
@@ -32,9 +33,10 @@ int main(void)
     bool group = test_group();
     bool hash = test_hash();
     bool manifest = test_manifest();
+    bool polynomial = test_polynomial();
 
     bool success = ballot_code && ballot && proofs && collections && election && elgamal &&
-                   encrypt_compact && encrypt && group && hash && manifest;
+                   encrypt_compact && encrypt && group && hash && manifest && polynomial;
 
     if (success == true) {
         printf("\n ---------- C TEST STATUS SUCCESS! ---------- \n");
