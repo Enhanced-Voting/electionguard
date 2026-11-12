@@ -25,7 +25,8 @@ include(cmake/CPM_0.31.0.cmake)
 CPMAddPackage(
     NAME StableCoder-cmake-scripts
     GITHUB_REPOSITORY StableCoder/cmake-scripts
-    GIT_TAG 23.06
+    # Commit of the 23.06 tag, which upstream deleted
+    GIT_TAG f74b505f6b0e4deefb1656f6383b87c67bec47fd
 )
 
 CPMAddPackage(
