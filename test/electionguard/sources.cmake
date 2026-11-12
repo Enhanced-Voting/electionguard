@@ -62,4 +62,5 @@ set(SOURCES_electionguard_test_c_tests
     ${CMAKE_CURRENT_SOURCE_DIR}/electionguard/test_group.c
     ${CMAKE_CURRENT_SOURCE_DIR}/electionguard/test_hash.c
     ${CMAKE_CURRENT_SOURCE_DIR}/electionguard/test_manifest.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/electionguard/test_polynomial.c
 )
